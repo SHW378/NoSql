@@ -1,0 +1,5 @@
+db.Users.find()
+db.Users.find({Edad: {$lt: 18}})
+db.Users.find({Edad: {$gt: 18}})
+db.Users.find({Edad: {$gte: 18}})
+db.Users.find({Edad: {$lte: 18}})
