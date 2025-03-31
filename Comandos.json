@@ -1,5 +1,14 @@
 db.Users.find()
-db.Users.find({Edad: {$lt: 18}})
-db.Users.find({Edad: {$gt: 18}})
-db.Users.find({Edad: {$gte: 18}})
-db.Users.find({Edad: {$lte: 18}})
+db.Users.find({Edad: {$lt: 18}}) //busca todos los usuarios que tengan edad menor a 18
+db.Users.find({Edad: {$gt: 18}}) //busca todos los usuarios que tengan edad menor a 18
+db.Users.find({Edad: {$gte: 18}}) //busca todos los usuarios que tengan edad mayor o igual a 18
+db.Users.find({Edad: {$lte: 18}}) //busca todos los usuarios que tengan edad menor o igual a 18
+db.Users.find({Nombre:"Geras"}) //busca todos los nombres que son Geras 
+db.Users.find({Apellido:"Robles"}) //busca todos los apellidos que son Robles
+dc.Users.find({Apellido: /^A/}) //busca todos los apellidos que empiezan con A
+
+//javascript, python y c
+console.log("Hola\nMundo") // \n agrega un salto de linea
+console.log("Hola\tMundo") // \t agrega un tabulador
+
+//Onv
