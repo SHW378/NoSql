@@ -11,4 +11,35 @@ dc.Users.find({Apellido: /^A/}) //busca todos los apellidos que empiezan con A
 console.log("Hola\nMundo") // \n agrega un salto de linea
 console.log("Hola\tMundo") // \t agrega un tabulador
 
-//Onv
+//Filtros de FIND()
+// --Comparadores--
+db.Users.find({Edad: {$eq: 18}}) //busca todos los usuarios que tengan edad igual a 18
+db.Users.find({Edad: {$ne: 18}}) //busca todos los usuarios que tengan edad diferente a 18
+db.Users.find({Edad: {$gt: 18}}) //busca todos los usuarios que tengan edad mayor a 18
+db.Users.find({Edad: {$gte: 18}}) //busca todos los usuarios que tengan edad mayor o igual a 18
+db.Users.find({Edad: {$lt: 18}}) //busca todos los usuarios que tengan edad menor a 18
+db.Users.find({Edad: {$lte: 18}}) //busca todos los usuarios que tengan edad menor o igual a 18
+
+// --Logicos--
+db.Users.find({Edad: {$and: {{Edad: {$gt: 18}}, {Edad: {$lt: 30}}}}}) //busca todos los usuarios que tengan edad mayor a 18 y menor a 30
+db.Users.find({Edad: {$or: [{Edad: {$gt: 18}}, {Edad: {$lt: 30}}]}}) //busca todos los usuarios que tengan edad mayor a 18 o menor a 30
+db.Users.find({edad: {$not: {$gt: 18}}}) //busca todos los usuarios que tengan edad menor a 18
+db.Users.find({$nor: [{Edad: {$gt: 18}}, {Edad: {$lt: 30}}]}) //busca todos los usuarios que tengan edad menor a 18 o mayor a 30
+
+// --Array-- 
+db.Users.fin({Edad: {$in: [18, 20, 22]}}) //busca todos los usuarios que tengan edad igual a 18, 20 o 22
+db.Users.find({Edad: {$nin: [18, 20, 22]}}) //busca todos los usuarios que tengan edad diferente a 18, 20 o 22
+db.Users.find({Edad: {$size: 3}}) //busca todos los usuarios que tengan edad igual a 18, 20 o 22
+db.Users.find({Edad: {$all: ["leer", "correr"]}}) //busca todos los usuarios que tengan edad igual a 18, 20 o 22
+
+// --Elementos--
+db.Users.find({Edad: {$exists: true}}) //busca todos los usuarios que tengan edad
+db.Users.find({Edad: {$exists: false}}) //busca todos los usuarios que no tengan edad
+db.Users.find({Edad: {$type: "int"}}) //busca todos los usuarios que tengan edad de tipo entero
+
+// --Regex-- 
+db.Users.find({Nombre: {$regex: /^G/}}) //busca todos los usuarios que tengan nombre que empiece con G
+db.Users.find({Nombre: {$regex: /G$/}}) //busca todos los usuarios que tengan nombre que termine con G
+db.Users.find({Nombre: {$regex: /G/}}) //busca todos los usuarios que tengan nombre que contenga G
+db.Users.find({Nombre: {$regex: /G/i}}) //busca todos los usuarios que tengan nombre que contenga G sin importar mayusculas o minusculas
+db.Users.find({Nombre: {$regex: /G/g}}) //busca todos los usuarios que tengan nombre que contenga G y que se repita varias veces
