@@ -24,6 +24,7 @@ db.Users.find({Edad: {$lte: 18}}) //busca todos los usuarios que tengan edad men
 db.Users.find({$and: [{Edad: {$gt: 18}}, {Edad: {$lt: 30}}]})// Busca documentos donde la "Edad" sea mayor a 18 y menor a 30
 db.Users.find({$or: [{Edad: {$gt: 18}}, {Nombre: "Juan"}]}) // Busca documentos donde la "Edad" sea mayor a 18 o el "Nombre" sea "Juan"
 db.Users.find({Edad: {$not: {$gt: 18}}}) // Busca documentos donde la "Edad" NO sea mayor a 18
+db.Users.find({$nor: [{Edad: {$gt: 18}}, {Nombre: "Juan"}]}) // Busca documentos donde la "Edad" NO sea mayor a 18 y el "Nombre" NO sea "Juan"
 
 // --Array-- 
 db.Users.fin({Edad: {$in: [18, 20, 22]}}) //busca todos los usuarios que tengan edad igual a 18, 20 o 22
