@@ -42,3 +42,10 @@ db.Users.find({Nombre: {$regex: /G$/}}) //busca todos los usuarios que tengan no
 db.Users.find({Nombre: {$regex: /G/}}) //busca todos los usuarios que tengan nombre que contenga G
 db.Users.find({Nombre: {$regex: /G/i}}) //busca todos los usuarios que tengan nombre que contenga G sin importar mayusculas o minusculas
 db.Users.find({Nombre: {$regex: /G/g}}) //busca todos los usuarios que tengan nombre que contenga G y que se repita varias veces
+
+
+//aggregatte 
+db.Personas.aggregate([{$group:{_id: "$ciudad", total: {$sum:1}}}])
+
+
+//mostrar a las cinco personas con la fecha de registro más reciente
