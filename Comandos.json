@@ -21,17 +21,15 @@ db.Users.find({Edad: {$lt: 18}}) //busca todos los usuarios que tengan edad meno
 db.Users.find({Edad: {$lte: 18}}) //busca todos los usuarios que tengan edad menor o igual a 18
 
 // --Logicos--
-db.Users.find({Edad: {$and: {{Edad: {$gt: 18}}, {Edad: {$lt: 30}}}}}) //busca todos los usuarios que tengan edad mayor a 18 y menor a 30
-db.Users.find({Edad: {$or: [{Edad: {$gt: 18}}, {Edad: {$lt: 30}}]}}) //busca todos los usuarios que tengan edad mayor a 18 o menor a 30
-db.Users.find({edad: {$not: {$gt: 18}}}) //busca todos los usuarios que tengan edad menor a 18
-db.Users.find({$nor: [{Edad: {$gt: 18}}, {Edad: {$lt: 30}}]}) //busca todos los usuarios que tengan edad menor a 18 o mayor a 30
+db.Users.find({$and: [{Edad: {$gt: 18}}, {Edad: {$lt: 30}}]})// Busca documentos donde la "Edad" sea mayor a 18 y menor a 30
+db.Users.find({$or: [{Edad: {$gt: 18}}, {Nombre: "Juan"}]}) // Busca documentos donde la "Edad" sea mayor a 18 o el "Nombre" sea "Juan"
+db.Users.find({Edad: {$not: {$gt: 18}}}) // Busca documentos donde la "Edad" NO sea mayor a 18
 
 // --Array-- 
 db.Users.fin({Edad: {$in: [18, 20, 22]}}) //busca todos los usuarios que tengan edad igual a 18, 20 o 22
 db.Users.find({Edad: {$nin: [18, 20, 22]}}) //busca todos los usuarios que tengan edad diferente a 18, 20 o 22
-db.Users.find({Edad: {$size: 3}}) //busca todos los usuarios que tengan edad igual a 18, 20 o 22
-db.Users.find({Edad: {$all: ["leer", "correr"]}}) //busca todos los usuarios que tengan edad igual a 18, 20 o 22
-
+db.Users.find({Edad: {$all: [18, 20, 22]}}) //busca todos los usuarios que tengan edad igual a 18, 20 y 22
+db.Users.find({Edad: {$size: 3}}) //busca todos los usuarios que tengan edad de tamaño 3
 // --Elementos--
 db.Users.find({Edad: {$exists: true}}) //busca todos los usuarios que tengan edad
 db.Users.find({Edad: {$exists: false}}) //busca todos los usuarios que no tengan edad
