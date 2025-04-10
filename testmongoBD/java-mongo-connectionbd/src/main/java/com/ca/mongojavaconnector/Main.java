@@ -23,6 +23,8 @@ public class Main {
             collection.insertOne(doc);
  
             System.out.println("Documento insertado correctamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -15,7 +15,7 @@ public class find {
             MongoDatabase database = mongoClient.getDatabase("Hola_Mundo");
 
             // Obtener colección (se crea si no exite)
-            MongoCollection<Document> collection = database.getCollection("Users");
+            MongoCollection<Document> collection = database.getCollection("Personas");
 
             // Hacer el find()
             FindIterable<Document> documents = collection.find();
