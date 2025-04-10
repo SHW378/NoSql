@@ -1,7 +1,5 @@
 package com.ca.mongojavaconnector;
 
-import java.util.Date;
-
 public class Persona {
     private String nombre;
     private int edad;
