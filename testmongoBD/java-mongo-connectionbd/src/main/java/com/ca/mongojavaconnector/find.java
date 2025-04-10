@@ -21,7 +21,7 @@ public class find {
 
             // Filtro de para la collección
             Document filter = new Document("nombre", "Carlos Pérez");
-            
+
             // Find() con el filtro ya aplicado
             Document personaDocument = collection.find(filter).first();
 
@@ -30,8 +30,7 @@ public class find {
                         personaDocument.getString("nombre"),
                         personaDocument.getInteger("edad"),
                         personaDocument.getString("ciudad"),
-                        personaDocument.getString("email")
-                );
+                        personaDocument.getString("email"));
                 System.out.println(persona);
             } else {
                 System.out.println("No se encontro la persona en el documento");
