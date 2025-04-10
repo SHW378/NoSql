@@ -19,8 +19,10 @@ public class find {
             // Obtener colección (se crea si no exite)
             MongoCollection<Document> collection = database.getCollection("Personas");
 
-            // Hacer el find()
+            // Filtro de para la collección
             Document filter = new Document("nombre", "Carlos Pérez");
+            
+            // Find() con el filtro ya aplicado
             Document personaDocument = collection.find(filter).first();
 
             if (personaDocument != null) {
