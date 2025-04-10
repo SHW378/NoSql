@@ -23,14 +23,14 @@ public class find {
             Document filter = new Document("nombre", "Carlos Pérez");
 
             // Find() con el filtro ya aplicado
-            Document personaDocument = collection.find(filter).first();
+            Document personafind = collection.find(filter).first();
 
-            if (personaDocument != null) {
+            if (personafind != null) {
                 Persona persona = new Persona(
-                        personaDocument.getString("nombre"),
-                        personaDocument.getInteger("edad"),
-                        personaDocument.getString("ciudad"),
-                        personaDocument.getString("email"));
+                        personafind.getString("nombre"),
+                        personafind.getInteger("edad"),
+                        personafind.getString("ciudad"),
+                        personafind.getString("email"));
                 System.out.println(persona);
             } else {
                 System.out.println("No se encontro la persona en el documento");
