@@ -35,9 +35,15 @@ public class InsertScanner {
                 }
                 doc.append(atributo, valor);
 
+                do {
                 System.out.println("¿Desea agregar otro atributo? (s/n)");
-                continuar = sc.nextLine();
-            } while (continuar.equalsIgnoreCase("s"));
+                continuar = sc.nextLine().toLowerCase();
+                if (!continuar.equals("s") && !continuar.equals("n")) {
+                    System.out.println("Caracter inválido. Por favor, ingrese s/n");
+                }
+            } while (!continuar.equals("s") && !continuar.equals("n"));
+
+        } while (continuar.equalsIgnoreCase("s"));
 
             collection.insertOne(doc);
             System.out.println("Documento Insertado con exito");
