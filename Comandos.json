@@ -49,3 +49,4 @@ db.Personas.aggregate([{$group:{_id: "$ciudad", total: {$sum:1}}}])
 
 
 //mostrar a las cinco personas con la fecha de registro más reciente
+db.Users.aggregate([{ $sort: { fechaRegistro: -1 } }, { $limit: 5 }])
