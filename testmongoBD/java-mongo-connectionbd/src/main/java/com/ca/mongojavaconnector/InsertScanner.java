@@ -1,4 +1,5 @@
 package com.ca.mongojavaconnector;
+
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
@@ -17,25 +18,33 @@ public class InsertScanner {
             System.out.println("Ingrese la colección a usar (si no existe se creara)");
             MongoCollection<Document> collection = database.getCollection(sc.nextLine());
 
-            System.out.println("Ingrese el nombre: ");
-            String nombre = sc.nextLine();
+            Document doc = new Document();
+            String continuar;
 
-            System.out.println("Ingrese la edad");
-            int edad = sc.nextInt();
+            do {
+                System.out.println("Ingrese el nombre del atributo: ");
+                String atributo = sc.nextLine();
+                System.out.println("Ingrese el valor del atributo: ");
+                String input = sc.nextLine();
 
-            Document dc = new Document("nombre", nombre)
-                                .append("edad", edad);
+                Object valor;
+                try {
+                    valor = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    valor = input;
+                }
+                doc.append(atributo, valor);
 
-            collection.insertOne(dc);
+                System.out.println("¿Desea agregar otro atributo? (s/n)");
+                continuar = sc.nextLine();
+            } while (continuar.equalsIgnoreCase("s"));
 
-            System.out.println("Documento insertado correctamente");
-
+            collection.insertOne(doc);
+            System.out.println("Documento Insertado con exito");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             sc.close();
         }
-
     }
-
 }
