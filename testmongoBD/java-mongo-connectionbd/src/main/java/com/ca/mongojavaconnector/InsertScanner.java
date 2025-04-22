@@ -39,7 +39,7 @@ public class InsertScanner {
                 System.out.println("¿Desea agregar otro atributo? (s/n)");
                 continuar = sc.nextLine().toLowerCase();
                 if (!continuar.equals("s") && !continuar.equals("n")) {
-                    System.out.println("Caracter inválido. Por favor, ingrese s/n");
+                    System.out.println("Caracter inválido. Por favor, ingrese s/n 's' para si o 'n' para no.");
                 }
             } while (!continuar.equals("s") && !continuar.equals("n"));
 
