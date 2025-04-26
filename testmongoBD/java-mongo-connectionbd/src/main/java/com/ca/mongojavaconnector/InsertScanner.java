@@ -32,8 +32,8 @@ public class InsertScanner {
             MongoCollection<Document> collection = database.getCollection(collectionName);
 
             crearDocumento(sc, collection);
-
             System.out.println("Documento insertado con exito");
+
         } catch (MongoTimeoutException e) {
             System.err.println("Error en la conexión a MongoDB.");
         } catch (Exception e) {
