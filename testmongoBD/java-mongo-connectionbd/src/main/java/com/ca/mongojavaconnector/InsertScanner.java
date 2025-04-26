@@ -21,7 +21,8 @@ public class InsertScanner {
 
             Document doc = new Document();
 
-            for (String continuar = "s"; continuar.equalsIgnoreCase("s"); ) {
+            String continuar;
+            for (;;) {
                 System.out.println("Ingrese el nombre del atributo: ");
                 String atributo = sc.nextLine();
                 System.out.println("Ingrese el valor del atributo: ");
@@ -38,15 +39,16 @@ public class InsertScanner {
                 for (;;) {
                     System.out.println("¿Desea agregar otro atributo? (s/n)");
                     continuar = sc.nextLine().toLowerCase();
-                    if (continuar.equals("s") || continuar.equals("n")) {
+                    if (continuar.equals("s")) {
                         break;
+                    } else if (continuar.equals("n")) {
+                        collection.insertOne(doc);
+                        System.out.println("Documento Insertado con éxito");
+                        return;
                     }
                     System.out.println("Caracter inválido. Por favor, ingrese 's' para continuar o 'n' para salir.");
                 }
             }
-
-            collection.insertOne(doc);
-            System.out.println("Documento Insertado con éxito");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
