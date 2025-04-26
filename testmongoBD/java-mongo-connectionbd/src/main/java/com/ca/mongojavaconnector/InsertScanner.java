@@ -43,7 +43,7 @@ public class InsertScanner {
         }
     }
 
-    private static Document crearDocumento(Scanner sc, MongoCollection<Document> collection) {
+    private static void crearDocumento(Scanner sc, MongoCollection<Document> collection) {
         Document doc = new Document();
         boolean continuarAgregando = true;
 
@@ -85,6 +85,5 @@ public class InsertScanner {
             }
         }
         collection.insertOne(doc);
-        return doc;
     }
 }
