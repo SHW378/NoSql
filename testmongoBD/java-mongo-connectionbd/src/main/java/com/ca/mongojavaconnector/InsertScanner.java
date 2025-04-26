@@ -6,6 +6,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import java.util.Scanner;
+import com.mongodb.MongoTimeoutException;
 
 public class InsertScanner {
     public static void main(String[] args) {
@@ -49,8 +50,10 @@ public class InsertScanner {
                     System.out.println("Caracter inválido. Por favor, ingrese 's' para continuar o 'n' para salir.");
                 }
             }
+        } catch (MongoTimeoutException e) {
+            System.err.println("Error en la conexión a MongoDB.");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
         } finally {
             sc.close();
         }
