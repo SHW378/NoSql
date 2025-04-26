@@ -13,15 +13,15 @@ public class InsertScanner {
 
         String uri = "mongodb://localhost:27017";
         try (MongoClient mongoClient = MongoClients.create(uri)) {
+            System.out.println();
             System.out.println("Ingrese la base de datos a usar (si no existe se creara)");
             MongoDatabase database = mongoClient.getDatabase(sc.nextLine());
             System.out.println("Ingrese la colección a usar (si no existe se creara)");
             MongoCollection<Document> collection = database.getCollection(sc.nextLine());
 
             Document doc = new Document();
-            String continuar;
 
-            do {
+            for (String continuar = "s"; continuar.equalsIgnoreCase("s"); ) {
                 System.out.println("Ingrese el nombre del atributo: ");
                 String atributo = sc.nextLine();
                 System.out.println("Ingrese el valor del atributo: ");
@@ -35,18 +35,18 @@ public class InsertScanner {
                 }
                 doc.append(atributo, valor);
 
-                do {
-                System.out.println("¿Desea agregar otro atributo? (s/n)");
-                continuar = sc.nextLine().toLowerCase();
-                if (!continuar.equals("s") && !continuar.equals("n")) {
-                    System.out.println("Caracter inválido. Por favor, ingrese s/n 's' para continuar o 'n' para salir.");
+                for (;;) {
+                    System.out.println("¿Desea agregar otro atributo? (s/n)");
+                    continuar = sc.nextLine().toLowerCase();
+                    if (continuar.equals("s") || continuar.equals("n")) {
+                        break;
+                    }
+                    System.out.println("Caracter inválido. Por favor, ingrese 's' para continuar o 'n' para salir.");
                 }
-            } while (!continuar.equals("s") && !continuar.equals("n"));
-
-        } while (continuar.equalsIgnoreCase("s"));
+            }
 
             collection.insertOne(doc);
-            System.out.println("Documento Insertado con exito");
+            System.out.println("Documento Insertado con éxito");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
