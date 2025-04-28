@@ -55,7 +55,7 @@ public class InsertScanner {
                 continue;
             }
 
-            System.out.println("Ingrese el valor del atributo de: " + collectionName + " -> " + atributo);
+            System.out.println("Ingrese el valor del atributo de: " + atributo + " -- " + collectionName);
             String input = sc.nextLine();
             Object valor;
             try {
