@@ -31,7 +31,7 @@ public class InsertScanner {
             }
             MongoCollection<Document> collection = database.getCollection(collectionName);
 
-            crearDocumento(sc, collection);
+            crearDocumento(sc, collection, collectionName);
             System.out.println("Documento insertado con exito");
 
         } catch (MongoTimeoutException e) {
@@ -43,19 +43,19 @@ public class InsertScanner {
         }
     }
 
-    private static void crearDocumento(Scanner sc, MongoCollection<Document> collection) {
+    private static void crearDocumento(Scanner sc, MongoCollection<Document> collection, String collectionName) {
         Document doc = new Document();
         boolean continuarAgregando = true;
 
         while (continuarAgregando) {
-            System.out.println("Ingrese el nombre del atributo");
+            System.out.println("Ingrese el nombre del atributo para: " + collectionName);
             String atributo = sc.nextLine();
             if (atributo.isEmpty()) {
                 System.out.println("El nombre del atributo no puede estar vacío.");
                 continue;
             }
 
-            System.out.println("Ingrese el valor del atributo");
+            System.out.println("Ingrese el valor del atributo de: " + collectionName + " -> " + atributo);
             String input = sc.nextLine();
             Object valor;
             try {
