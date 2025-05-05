@@ -43,14 +43,6 @@ public class Main {
                 System.out.println("5. Salir del programa");
 
                 String opcion = sc.nextLine();
-                if (!sc.hasNextLine()) {
-                    System.out.println("Opción no válida. Por favor, elija entre 1 y 5.");
-                    continue;
-                }
-                if (opcion.isEmpty()) {
-                    System.out.println("La opción no puede estar vacía.");
-                    continue;
-                }
 
                 switch (opcion) {
                     case "1":
