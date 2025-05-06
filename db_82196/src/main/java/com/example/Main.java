@@ -68,14 +68,14 @@ public class Main {
                             break;
                         case "6":
                             System.out.println("Saliendo del programa...");
-                            System.exit(0); 
+                            System.exit(0);
                         default:
                             System.out.println("Opción no válida. Por favor, elija entre 1 y 7.");
                             break;
                     }
 
                     if (opcion.equals("6")) {
-                        break; 
+                        break;
                     }
                 }
             }
@@ -87,7 +87,8 @@ public class Main {
             sc.close();
         }
     }
-private static MongoCollection<Document> seleccionarColeccion(Scanner sc, MongoDatabase database) {
+
+    private static MongoCollection<Document> seleccionarColeccion(Scanner sc, MongoDatabase database) {
         System.out.println("\n--- Colecciones disponibles ---");
         MongoIterable<String> colecciones = database.listCollectionNames();
         boolean hayColecciones = false;
@@ -124,9 +125,10 @@ private static MongoCollection<Document> seleccionarColeccion(Scanner sc, MongoD
         System.out.println("Colección seleccionada: " + collectionName);
         return database.getCollection(collectionName);
     }
-private static void crearDocumento(Scanner sc, MongoCollection<Document> collection, String collectionName) {
 
-    Document doc = new Document();
+    private static void crearDocumento(Scanner sc, MongoCollection<Document> collection, String collectionName) {
+
+        Document doc = new Document();
         if (collectionName.equals("empleados")) {
             System.out.println("Ingrese el nombre del empleado: ");
             String nombreEmpleado = sc.nextLine();
@@ -136,9 +138,9 @@ private static void crearDocumento(Scanner sc, MongoCollection<Document> collect
             String tareasEmpleado = sc.nextLine();
 
             doc.append("nombre", nombreEmpleado)
-               .append("rol", rolEmpleado)
-               .append("tareas_asignadas", tareasEmpleado);
-               System.out.println("Documento insertado en la colección 'empleados': " + doc.toJson());
+                    .append("rol", rolEmpleado)
+                    .append("tareas_asignadas", tareasEmpleado);
+            System.out.println("Documento insertado en la colección 'empleados': " + doc.toJson());
             collection.insertOne(doc);
 
         } else if (collectionName.equals("proyecto")) {
@@ -150,8 +152,8 @@ private static void crearDocumento(Scanner sc, MongoCollection<Document> collect
             String estadoProyecto = sc.nextLine();
 
             doc.append("nombre", nombreProyecto)
-               .append("fecha_inicio", fechaInicioProyecto)
-               .append("estado", estadoProyecto);
+                    .append("fecha_inicio", fechaInicioProyecto)
+                    .append("estado", estadoProyecto);
             System.out.println("Documento insertado en la colección 'proyecto': " + doc.toJson());
             collection.insertOne(doc);
 
@@ -163,12 +165,12 @@ private static void crearDocumento(Scanner sc, MongoCollection<Document> collect
             System.out.println("Ingrese la fecha de inicio de la tarea: ");
             String fechaInicioTarea = sc.nextLine();
             doc.append("titulo", tituloTarea)
-               .append("fecha_limite", fechaLimiteTarea)
-               .append("fecha_inicio", fechaInicioTarea);
+                    .append("fecha_limite", fechaLimiteTarea)
+                    .append("fecha_inicio", fechaInicioTarea);
             System.out.println("Documento insertado en la colección 'tareas': " + doc.toJson());
             collection.insertOne(doc);
         }
-}
+    }
 
     private static void leerDocumentos(MongoCollection<Document> collection) {
         System.out.println("\n--- Documentos en la colección ---");
