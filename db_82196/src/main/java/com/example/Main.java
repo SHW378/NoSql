@@ -38,7 +38,7 @@ public class Main {
                 String collectionName = sc.nextLine().trim();
                 if (collectionName.isEmpty()) {
                     System.out.println("El nombre de la colección no puede estar vacío.");
-                    return;
+                    continue;
                 }
                 boolean coleccionExiste = false;
                 for (String coleccion : database.listCollectionNames()) {
@@ -49,7 +49,7 @@ public class Main {
                 }
                 if (!coleccionExiste) {
                     System.out.println("La colección '" + collectionName + "' no existe.");
-                    return;
+                    continue;
                 }
                 System.out.println("Colección seleccionada: " + collectionName);
                 collection = database.getCollection(collectionName);
