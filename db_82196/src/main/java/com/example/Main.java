@@ -23,9 +23,40 @@ public class Main {
                 System.out.println("Base de datos en uso: " + database.getName());
                 MongoCollection<Document> collection = null;
 
+                System.out.println("Collecciones disponibles:");
+                MongoIterable<String> colecciones = database.listCollectionNames();
+                boolean hayColecciones = false;
+                for (String coleccion : colecciones) {
+                    System.out.println("- " + coleccion);
+                    hayColecciones = true;
+                }
+                if (!hayColecciones) {
+                    System.out.println("No hay colecciones disponibles en esta base de datos.");
+                    return;
+                }
+                System.out.println("Ingrese el nombre de la colección que desea usar:");
+                String collectionName = sc.nextLine().trim();
+                if (collectionName.isEmpty()) {
+                    System.out.println("El nombre de la colección no puede estar vacío.");
+                    return;
+                }
+                boolean coleccionExiste = false;
+                for (String coleccion : database.listCollectionNames()) {
+                    if (coleccion.equals(collectionName)) {
+                        coleccionExiste = true;
+                        break;
+                    }
+                }
+                if (!coleccionExiste) {
+                    System.out.println("La colección '" + collectionName + "' no existe.");
+                    return;
+                }
+                System.out.println("Colección seleccionada: " + collectionName);
+                collection = database.getCollection(collectionName);
+                
                 while (true) {
                     System.out.println("\n--Elige una opción--");
-                    System.out.println("1. Seleccionar una colección");
+                    System.out.println("1. Cambiar collección");
                     System.out.println("2. Insertar un documento");
                     System.out.println("3. Leer documentos");
                     System.out.println("4. Actualizar un documento");
@@ -70,7 +101,7 @@ public class Main {
                             System.out.println("Saliendo del programa...");
                             System.exit(0);
                         default:
-                            System.out.println("Opción no válida. Por favor, elija entre 1 y 7.");
+                            System.out.println("Opción no válida. Por favor, elija entre 1 y 6.");
                             break;
                     }
 
@@ -134,12 +165,21 @@ public class Main {
             String nombreEmpleado = sc.nextLine();
             System.out.println("Ingrese el rol del empleado: ");
             String rolEmpleado = sc.nextLine();
-            System.out.println("Ingrese las tareas asignadas al empleado: ");
-            String tareasEmpleado = sc.nextLine();
+            int edadEmpleado = 0;
+            boolean edadValida = false; 
+            while (!edadValida) {
+                System.out.println("Ingrese la edad del empleado: ");
+                try {
+                    edadEmpleado = Integer.parseInt(sc.nextLine());
+                    edadValida = true; 
+                } catch (NumberFormatException e) {
+                    System.out.println("Por favor, ingrese un número válido para la edad.");
+                }
+            }
 
             doc.append("nombre", nombreEmpleado)
                     .append("rol", rolEmpleado)
-                    .append("tareas_asignadas", tareasEmpleado);
+                    .append("edad", edadEmpleado);
             System.out.println("Documento insertado en la colección 'empleados': " + doc.toJson());
             collection.insertOne(doc);
 

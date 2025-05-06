@@ -3,12 +3,12 @@ package com.example;
 public class Empleados {
     private String nombre;
     private String rol;
-    private String tareas_asignadas;
+    private int edad;
 
-    public Empleados(String nombre, String rol, String tareas_asignadas) {
+    public Empleados(String nombre, String rol, int edad) {
         this.nombre = nombre;
         this.rol = rol;
-        this.tareas_asignadas = tareas_asignadas;
+        this.edad = edad;
     }
     public String getNombre() {
         return nombre;
@@ -22,10 +22,10 @@ public class Empleados {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    public String getTareas_asignadas() {
-        return tareas_asignadas;
+    public int getEdad() {
+        return edad;
     }
-    public void setTareas_asignadas(String tareas_asignadas) {
-        this.tareas_asignadas = tareas_asignadas;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 }
