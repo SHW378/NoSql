@@ -20,7 +20,8 @@ public class Main {
                 System.out.println();
                 String DBname = "DB_82196";
                 MongoDatabase database = mongoClient.getDatabase(DBname);
-                System.out.println("Base de datos en uso: " + database.getName());
+                System.out.println("Base de datos en uso: " + DBname);
+                System.out.println();
                 MongoCollection<Document> collection = null;
 
                 System.out.println("Collecciones disponibles:");
