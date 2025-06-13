@@ -1,14 +1,15 @@
 package com.example;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoIterable;
+import java.util.Scanner;
+
 import org.bson.Document;
 
-import java.util.Scanner;
 import com.mongodb.MongoTimeoutException;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class Main {
                 MongoDatabase database = mongoClient.getDatabase(DBname);
                 System.out.println("Base de datos en uso: " + DBname);
                 System.out.println();
-                MongoCollection<Document> collection = null;
+                MongoCollection<Document> collection;
 
                 System.out.println("Collecciones disponibles:");
                 MongoIterable<String> colecciones = database.listCollectionNames();
@@ -161,55 +162,57 @@ public class Main {
     private static void crearDocumento(Scanner sc, MongoCollection<Document> collection, String collectionName) {
 
         Document doc = new Document();
-        if (collectionName.equals("empleados")) {
-            System.out.println("Ingrese el nombre del empleado: ");
-            String nombreEmpleado = sc.nextLine();
-            System.out.println("Ingrese el rol del empleado: ");
-            String rolEmpleado = sc.nextLine();
-            int edadEmpleado = 0;
-            boolean edadValida = false; 
-            while (!edadValida) {
-                System.out.println("Ingrese la edad del empleado: ");
-                try {
-                    edadEmpleado = Integer.parseInt(sc.nextLine());
-                    edadValida = true; 
-                } catch (NumberFormatException e) {
-                    System.out.println("Por favor, ingrese un número válido para la edad.");
+        switch (collectionName) {
+            case "empleados" -> {
+                System.out.println("Ingrese el nombre del empleado: ");
+                String nombreEmpleado = sc.nextLine();
+                System.out.println("Ingrese el rol del empleado: ");
+                String rolEmpleado = sc.nextLine();
+                int edadEmpleado = 0;
+                boolean edadValida = false; 
+                while (!edadValida) {
+                    System.out.println("Ingrese la edad del empleado: ");
+                    try {
+                        edadEmpleado = Integer.parseInt(sc.nextLine());
+                        edadValida = true; 
+                    } catch (NumberFormatException e) {
+                        System.out.println("Por favor, ingrese un número válido para la edad.");
+                    }
                 }
+
+                doc.append("nombre", nombreEmpleado)
+                        .append("rol", rolEmpleado)
+                        .append("edad", edadEmpleado);
+                System.out.println("Documento insertado en la colección 'empleados': " + doc.toJson());
+                collection.insertOne(doc);
             }
+            case "proyecto" -> {
+                System.out.println("Ingrese el nombre del proyecto: ");
+                String nombreProyecto = sc.nextLine();
+                System.out.println("Ingrese la fecha de inicio del proyecto: ");
+                String fechaInicioProyecto = sc.nextLine();
+                System.out.println("Ingrese el estado del proyecto: ");
+                String estadoProyecto = sc.nextLine();
 
-            doc.append("nombre", nombreEmpleado)
-                    .append("rol", rolEmpleado)
-                    .append("edad", edadEmpleado);
-            System.out.println("Documento insertado en la colección 'empleados': " + doc.toJson());
-            collection.insertOne(doc);
-
-        } else if (collectionName.equals("proyecto")) {
-            System.out.println("Ingrese el nombre del proyecto: ");
-            String nombreProyecto = sc.nextLine();
-            System.out.println("Ingrese la fecha de inicio del proyecto: ");
-            String fechaInicioProyecto = sc.nextLine();
-            System.out.println("Ingrese el estado del proyecto: ");
-            String estadoProyecto = sc.nextLine();
-
-            doc.append("nombre", nombreProyecto)
-                    .append("fecha_inicio", fechaInicioProyecto)
-                    .append("estado", estadoProyecto);
-            System.out.println("Documento insertado en la colección 'proyecto': " + doc.toJson());
-            collection.insertOne(doc);
-
-        } else if (collectionName.equals("tareas")) {
-            System.out.println("Ingrese el titulo de la tarea: ");
-            String tituloTarea = sc.nextLine();
-            System.out.println("Ingrese la fecha límite de la tarea: ");
-            String fechaLimiteTarea = sc.nextLine();
-            System.out.println("Ingrese la fecha de inicio de la tarea: ");
-            String fechaInicioTarea = sc.nextLine();
-            doc.append("titulo", tituloTarea)
-                    .append("fecha_limite", fechaLimiteTarea)
-                    .append("fecha_inicio", fechaInicioTarea);
-            System.out.println("Documento insertado en la colección 'tareas': " + doc.toJson());
-            collection.insertOne(doc);
+                doc.append("nombre", nombreProyecto)
+                        .append("fecha_inicio", fechaInicioProyecto)
+                        .append("estado", estadoProyecto);
+                System.out.println("Documento insertado en la colección 'proyecto': " + doc.toJson());
+                collection.insertOne(doc);
+            }
+            case "tareas" -> {
+                System.out.println("Ingrese el titulo de la tarea: ");
+                String tituloTarea = sc.nextLine();
+                System.out.println("Ingrese la fecha límite de la tarea: ");
+                String fechaLimiteTarea = sc.nextLine();
+                System.out.println("Ingrese la fecha de inicio de la tarea: ");
+                String fechaInicioTarea = sc.nextLine();
+                doc.append("titulo", tituloTarea)
+                        .append("fecha_limite", fechaLimiteTarea)
+                        .append("fecha_inicio", fechaInicioTarea);
+                System.out.println("Documento insertado en la colección 'tareas': " + doc.toJson());
+                collection.insertOne(doc);
+            }
         }
     }
 
